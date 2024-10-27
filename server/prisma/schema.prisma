@@ -14,18 +14,18 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id    Int @id @default(autoincrement())
   name  String
   email String  @unique
-  messageSent Message[] @relation('SentMessages')
-  receivedMessage Message[] @relation('ReceivedMessages')
+  messageSent Message[] @relation("SentMessages")
+  receivedMessage Message[] @relation("ReceivedMessages")
 }
 
 model Message {
-  id        Int     @id @default(autoincrement())
+  id        Int @id @default(autoincrement())
   content   String
-  sender    User    @relation('SentMessages', fields: [senderId], references: [id])
+  sender    User @relation("SentMessages", fields: [senderId], references: [id])
   senderId  Int
   receiverId  Int
-  receiver    User    @relation('ReceivedMessages', fields: [receiverId], references: [id])
+  receiver   User @relation("ReceivedMessages", fields: [receiverId], references: [id])
 }
